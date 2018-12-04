@@ -2,8 +2,11 @@ package javabuttons;
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
@@ -18,6 +21,7 @@ public class JavaButtonsTester extends Application {
     private static final int WIDTH = 800;
     private static final int HEIGHT = 600;
     private static Canvas canvas;
+    private static Color bg = Color.ROYALBLUE;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -30,10 +34,29 @@ public class JavaButtonsTester extends Application {
         Scene primaryScene = new Scene(root, WIDTH, HEIGHT);
 
         // Graphics code goes here
-        PresetButtons.drawModernButton(canvas, WIDTH / 2, HEIGHT / 2, 100, 40, 15, Color.web("FF2eFF"), "Click Me", new Font("Gabriola", 15));
+        int buttonX = WIDTH / 2;
+        int buttonY = HEIGHT / 2;
+        int buttonW = 100;
+        int buttonH = 40;
+        int alpha = 80;
+        PresetButtons.drawModernButton(canvas, buttonX, buttonY, buttonW, buttonH, 15, Color.web("FFFFFF"), Color.BROWN, alpha, "Click Me", new Font("Gabriola", 15));
         stage.setScene(primaryScene);
         stage.setTitle("Title");
         stage.show();
+
+        primaryScene.setOnMousePressed(new EventHandler<MouseEvent>() {
+            public void handle(MouseEvent event) {
+                int mX = (int) event.getX();
+                int mY = (int) event.getY();
+                if (mX > buttonX && mX < buttonX + buttonW && mY > buttonY && mY < buttonY + buttonH) {
+                    GraphicsContext gc = canvas.getGraphicsContext2D();
+                    bg = bg.invert();
+                    gc.setFill(bg);
+                    gc.fillRect(0, 0, WIDTH, HEIGHT); // clear
+                    PresetButtons.drawModernButton(canvas, WIDTH / 2, HEIGHT / 2, 100, 40, 15, Color.web("FFFFFF"), Color.BROWN, alpha, "Click Me", new Font("Gabriola", 15));
+                }
+            }
+        });
     }
 
     /**
