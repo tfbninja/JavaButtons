@@ -15,9 +15,12 @@ public class PresetButtons {
         GraphicsContext graphics = canvas.getGraphicsContext2D();
         graphics.setStroke(borderColor);
         graphics.setFont(font);
-        graphics.fillRoundRect(xPos, yPos, width, height, radius, radius);
+        graphics.setLineWidth(5);
+        graphics.strokeRoundRect(xPos, yPos, width, height, radius, radius);
         int xPadding = (int) (width - (font.getSize() * text.length()) / 2);
-        graphics.fillText(text, xPos + xPadding, yPos);
+        int yPadding = (int) (height - font.getSize() / 2);
+        graphics.fillText(text, xPos + xPadding, yPos + yPadding);
+        graphics.strokeRoundRect(xPos, yPos, width, height, radius, radius);
     }
 }
 

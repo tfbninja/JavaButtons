@@ -30,7 +30,7 @@ public class JavaButtonsTester extends Application {
         Scene primaryScene = new Scene(root, WIDTH, HEIGHT);
 
         // Graphics code goes here
-        PresetButtons.drawModernButton(canvas, WIDTH / 2, HEIGHT / 2, 100, 40, 15, Color.web("FFFFFF"), "Click Me", new Font("Verdana", 15));
+        PresetButtons.drawModernButton(canvas, WIDTH / 2, HEIGHT / 2, 100, 40, 15, Color.web("FF2eFF"), "Click Me", new Font("Gabriola", 15));
         stage.setScene(primaryScene);
         stage.setTitle("Title");
         stage.show();
